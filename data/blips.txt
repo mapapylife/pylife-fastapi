@@ -1,0 +1,67 @@
+# Spawny
+-1938.44,889.50,Punkt spawnu,icons/Icon_38.png
+1477.74,-1710.82,Punkt spawnu,icons/Icon_38.png
+2317.22,83.41,Punkt spawnu,icons/Icon_38.png
+44.01,1213.50,Punkt spawnu,icons/Icon_38.png
+-247.15,2609.66,Punkt spawnu,icons/Icon_38.png
+-1478.24,2654.63,Punkt spawnu,icons/Icon_38.png
+-2514.32,2399.65,Punkt spawnu,icons/Icon_38.png
+2419.49,2379.46,Punkt spawnu,icons/Icon_38.png
+1975.45,2441.27,Punkt spawnu,icons/Icon_38.png
+-1080.55,-1323.43,Punkt spawnu,icons/Icon_38.png
+
+# Lotniska
+1961.68,-2182.56,Port lotniczy,icons/Icon_5.png
+-1549.89,-434.72,Port lotniczy,icons/Icon_5.png
+1718.42,1612.15,Port lotniczy,icons/Icon_5.png
+362.20,2555.51,Port lotniczy,icons/Icon_5.png
+
+# Warsztaty samochodowe
+2138.03,-2154.61,Warsztat samochodowy,icons/Icon_27.png
+-2030.23,174.42,Warsztat samochodowy,icons/Icon_27.png
+-2331.20,-154.00,Warsztat samochodowy,icons/Icon_27.png
+-2349.88,1010.58,Warsztat samochodowy,icons/Icon_27.png
+-2462.23,2501.55,Warsztat samochodowy,icons/Icon_27.png
+-77.59,1043.35,Warsztat samochodowy,icons/Icon_27.png
+110.40,-165.13,Warsztat samochodowy,icons/Icon_27.png
+2581.32,14.82,Warsztat samochodowy,icons/Icon_27.png
+1362.99,712.97,Warsztat samochodowy,icons/Icon_27.png
+1097.05,1761.14,Warsztat samochodowy,icons/Icon_27.png
+
+# Szkoły jazdy
+1114.74,1249.04,Szkoła jazdy,icons/Icon_36.png
+-233.19,2709.10,Szkoła jazdy,icons/Icon_36.png
+-1730.83,-109.21,Szkoła jazdy,icons/Icon_36.png
+415.10,2535.58,Szkoła jazdy,icons/Icon_36.png
+-1239.77,54.82,Szkoła jazdy,icons/Icon_36.png
+
+# Urzędy
+1480.61,-1769.95,Urząd miasta,icons/Icon_39.png
+-2761.43,376.10,Urząd miasta,icons/Icon_39.png
+-204.01,1119.29,Urząd miasta,icons/Icon_39.png
+2445.12,2375.97,Urząd miasta,icons/Icon_39.png
+
+# Przechowalnie
+1985.09,2487.76,Przechowalnia pojazdów,icons/Icon_35.png
+1581.80,-1408.27,Przechowalnia pojazdów,icons/Icon_35.png
+793.87,-613.00,Przechowalnia pojazdów,icons/Icon_35.png
+-1414.62,-298.82,Przechowalnia pojazdów,icons/Icon_35.png
+-1971.41,881.68,Przechowalnia pojazdów,icons/Icon_35.png
+-1961.69,434.36,Przechowalnia pojazdów,icons/Icon_35.png
+-2280.40,2313.53,Przechowalnia pojazdów,icons/Icon_35.png
+140.15,571.94,Przechowalnia pojazdów,icons/Icon_35.png
+
+# Giełdy samochodowe
+2114.07,-2090.38,Giełda samochodowa,icons/Icon_55.png
+-2141.77,-754.21,Giełda samochodowa,icons/Icon_55.png
+1729.30,1856.10,Giełda samochodowa,icons/Icon_55.png
+-1897.86,-860.48,Giełda samochodowa,icons/Icon_55.png
+-2075.62,1369.08,Giełda samochodowa,icons/Icon_55.png
+2783.98,-2434.87,Giełda samochodowa,icons/Icon_55.png
+
+# Służby
+1144.82,-1336.94,Państwowa Straż Pożarna,icons/Icon_20.png
+1546.17,-1675.30,Straż Miejska San Andreas,icons/Icon_30.png
+2287.24,2429.73,San Andreas Police Department,icons/Icon_30.png
+-2668.18,625.22,San Andreas Medical Center,icons/Icon_22.png
+-215.79,980.69,Biuro szeryfa,icons/Icon_30.png

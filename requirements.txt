@@ -1,0 +1,8 @@
+aiohttp
+fastapi
+pylife-api
+python-cron
+python-rapidjson
+shapely
+tortoise-orm[asyncpg]
+uvicorn[standard]

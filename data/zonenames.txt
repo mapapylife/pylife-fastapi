@@ -1,0 +1,168 @@
+1,Aldea Malvada,Obszar w Tierra Robada
+2,Angel Pine,Miejscowość w Whetstone
+3,Arco del Oeste,Obszar w Tierra Robada
+4,Avispa Country Club,Dzielnica w San Fierro
+5,Back o Beyond,Obszar w Flint County
+6,Battery Point,Dzielnica w San Fierro
+7,Bayside,Miejscowość w Tierra Robada
+8,Bayside Marina,Obszar w Tierra Robada
+9,Bayside Tunnel,Obszar w Tierra Robada
+10,Beacon Hill,Obszar w Flint County
+11,Blackfield,Dzielnica w Las Venturas
+12,Blackfield Chapel,Dzielnica w Las Venturas
+13,Blackfield Intersection,Dzielnica w Las Venturas
+14,Blueberry,Miejscowość w Red County
+15,Blueberry Acres,Obszar w Red County
+16,Bone County,Hrabstwo w San Andreas
+17,Caligula's Palace,Dzielnica w Las Venturas
+18,Calton Heights,Dzielnica w San Fierro
+19,Chinatown,Dzielnica w San Fierro
+20,City Hall,Dzielnica w San Fierro
+21,Come-A-Lot,Dzielnica w Las Venturas
+22,Commerce,Dzielnica w Los Santos
+23,Conference Center,Dzielnica w Los Santos
+24,Cranberry Station,Dzielnica w San Fierro
+25,Creek,Dzielnica w Las Venturas
+26,Dillimore,Miejscowość w Red County
+27,Doherty,Dzielnica w San Fierro
+28,Downtown,Dzielnica w San Fierro
+29,Downtown Los Santos,Dzielnica w Los Santos
+30,East Beach,Dzielnica w Los Santos
+31,Easter Basin,Dzielnica w San Fierro
+32,Easter Bay Airport,Dzielnica w San Fierro
+33,Easter Bay Chemicals,Obszar w Red County
+34,Easter Tunnel,Dzielnica w San Fierro
+35,East Los Santos,Dzielnica w Los Santos
+36,El Castillo del Diablo,Obszar w Bone County
+37,El Corona,Dzielnica w Los Santos
+38,El Quebrados,Miejscowość w Tierra Robada
+39,Esplanade East,Dzielnica w San Fierro
+40,Esplanade North,Dzielnica w San Fierro
+41,Fallen Tree,Obszar w Red County
+42,Fallow Bridge,Obszar w Red County
+43,Fern Ridge,Obszar w Red County
+44,Financial,Dzielnica w San Fierro
+45,Fisher's Lagoon,Obszar w Red County
+46,Flint County,Hrabstwo w San Andreas
+47,Flint Intersection,Obszar w Flint County
+48,Flint Range,Obszar w Flint County
+49,Flint Water,Obszar w Red County
+50,Fort Carson,Miejscowość w Bone County
+51,Foster Valley,Dzielnica w San Fierro
+52,Frederick Bridge,Obszar w Red County
+53,Gant Bridge,Obszar w Tierra Robada
+54,Ganton,Dzielnica w Los Santos
+55,Garcia,Dzielnica w San Fierro
+56,Garver Bridge,Dzielnica w San Fierro
+57,Glen Park,Dzielnica w Los Santos
+58,Greenglass College,Dzielnica w Las Venturas
+59,Green Palms,Obszar w Bone County
+60,Hampton Barns,Obszar w Red County
+61,Hankypanky Point,Obszar w Red County
+62,Harry Gold Parkway,Dzielnica w Las Venturas
+63,Hashbury,Dzielnica w San Fierro
+64,Hilltop Farm,Obszar w Red County
+65,Hunter Quarry,Obszar w Bone County
+66,Idlewood,Dzielnica w Los Santos
+67,Jefferson,Dzielnica w Los Santos
+68,Julius Thruway East,Dzielnica w Las Venturas
+69,Julius Thruway North,Dzielnica w Las Venturas
+70,Julius Thruway South,Dzielnica w Las Venturas
+71,Julius Thruway West,Dzielnica w Las Venturas
+72,Juniper Hill,Dzielnica w San Fierro
+73,Juniper Hollow,Dzielnica w San Fierro
+74,K.A.C.C. Military Fuels,Dzielnica w Las Venturas
+75,Kincaid Bridge,Obszar w Tierra Robada
+76,King's,Dzielnica w San Fierro
+77,Las Barrancas,Miejscowość w Tierra Robada
+78,Las Brujas,Miejscowość w Bone County
+79,Las Colinas,Dzielnica w Los Santos
+80,Las Payasadas,Miejscowość w Bone County
+81,Last Dime Motel,Dzielnica w Las Venturas
+82,Las Venturas,Miasto w San Andreas
+83,Las Venturas Airport,Dzielnica w Las Venturas
+84,Leafy Hollow,Obszar w Flint County
+85,Lil' Probe Inn,Obszar w Bone County
+86,Linden Side,Dzielnica w Las Venturas
+87,Linden Station,Dzielnica w Las Venturas
+88,Little Mexico,Dzielnica w Los Santos
+89,Los Flores,Dzielnica w Los Santos
+90,Los Santos,Miasto w San Andreas
+91,Los Santos Inlet,Obszar w Flint County
+92,Los Santos International,Dzielnica w Los Santos
+93,LVA Freight Depot,Dzielnica w Las Venturas
+94,Marina,Dzielnica w Los Santos
+95,Market,Dzielnica w Los Santos
+96,Market Station,Dzielnica w Los Santos
+97,Martin Bridge,Obszar w Red County
+98,Missionary Hill,Dzielnica w San Fierro
+99,Montgomery,Miejscowość w Red County
+100,Montgomery Intersection,Obszar w Red County
+101,Mount Chiliad,Obszar w Whetstone
+102,Mulholland,Dzielnica w Los Santos
+103,Mulholland Intersection,Dzielnica w Los Santos
+104,North Rock,Obszar w Red County
+105,Ocean Docks,Dzielnica w Los Santos
+106,Ocean Flats,Dzielnica w San Fierro
+107,Octane Springs,Obszar w Bone County
+108,Old Venturas Strip,Dzielnica w Las Venturas
+109,Palisades,Dzielnica w San Fierro
+110,Palomino Creek,Miejscowość w Red County
+111,Paradiso,Dzielnica w San Fierro
+112,Pershing Square,Dzielnica w Los Santos
+113,Pilgrim,Dzielnica w Las Venturas
+114,Pilson Intersection,Dzielnica w Las Venturas
+115,Pirates in Men's Pants,Dzielnica w Las Venturas
+116,Playa del Seville,Dzielnica w Los Santos
+117,Prickle Pine,Dzielnica w Las Venturas
+118,Queens,Dzielnica w San Fierro
+119,Randolph Industrial Estate,Dzielnica w Las Venturas
+120,Red County,Hrabstwo w San Andreas
+121,Redsands East,Dzielnica w Las Venturas
+122,Redsands West,Dzielnica w Las Venturas
+123,Regular Tom,Obszar w Bone County
+124,Restricted Area,Obszar w Bone County
+125,Richman,Dzielnica w Los Santos
+126,Robada Intersection,Obszar w Tierra Robada
+127,Roca Escalante,Dzielnica w Las Venturas
+128,Rockshore East,Dzielnica w Las Venturas
+129,Rockshore West,Dzielnica w Las Venturas
+130,Rodeo,Dzielnica w Los Santos
+131,Royal Casino,Dzielnica w Las Venturas
+132,San Andreas Sound,Obszar w Red County
+133,San Fierro,Miasto w San Andreas
+134,San Fierro Bay,Obszar w Tierra Robada
+135,Santa Flora,Dzielnica w San Fierro
+136,Santa Maria Beach,Dzielnica w Los Santos
+137,Shady Cabin,Obszar w Whetstone
+138,Shady Creeks,Obszar w Whetstone
+139,Sherman Reservoir,Obszar w Tierra Robada
+140,Sobell Rail Yards,Dzielnica w Las Venturas
+141,Spinybed,Dzielnica w Las Venturas
+142,Starfish Casino,Dzielnica w Las Venturas
+143,Temple,Dzielnica w Los Santos
+144,'The Big Ear',Obszar w Bone County
+145,The Camel's Toe,Dzielnica w Las Venturas
+146,The Clown's Pocket,Dzielnica w Las Venturas
+147,The Emerald Isle,Dzielnica w Las Venturas
+148,The Farm,Obszar w Flint County
+149,The Four Dragons Casino,Dzielnica w Las Venturas
+150,The High Roller,Dzielnica w Las Venturas
+151,The Mako Span,Obszar w Red County
+152,The Panopticon,Obszar w Red County
+153,The Pink Swan,Dzielnica w Las Venturas
+154,The Sherman Dam,Obszar w Tierra Robada
+155,The Strip,Dzielnica w Las Venturas
+156,The Visage,Dzielnica w Las Venturas
+157,Tierra Robada,Hrabstwo w San Andreas
+158,Unity Station,Dzielnica w Los Santos
+159,Valle Ocultado,Miejscowość w Tierra Robada
+160,Verdant Bluffs,Dzielnica w Los Santos
+161,Verdant Meadows,Obszar w Bone County
+162,Verona Beach,Dzielnica w Los Santos
+163,Vinewood,Dzielnica w Los Santos
+164,Whetstone,Hrabstwo w San Andreas
+165,Whitewood Estates,Dzielnica w Las Venturas
+166,Willowfield,Dzielnica w Los Santos
+167,Yellow Bell Golf Course,Dzielnica w Las Venturas
+168,Yellow Bell Station,Dzielnica w Las Venturas
