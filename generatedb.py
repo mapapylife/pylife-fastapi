@@ -42,7 +42,7 @@ async def generate_zones():
             zones[zone_id] = {
                 "name": line.split(",")[1],
                 "description": line.split(",")[2].rstrip(),
-                "points": []
+                "points": [],
             }
 
     # Download zone data from MTA repository
@@ -119,7 +119,7 @@ async def generate_players(client: PylifeAPIClient):
     for player in await client.get_players():
         await Player.create(
             id=player.id,
-            name=player.login,
+            login=player.login,
             premium=player.premium,
             registered=player.registered,
             last_online=player.last_online,

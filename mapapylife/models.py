@@ -78,7 +78,7 @@ class Zone(Model):
 
 class Player(Model):
     id = fields.IntField(pk=True)
-    name = fields.CharField(max_length=22, null=False)
+    login = fields.CharField(max_length=22, null=False)
     premium = fields.DatetimeField(null=True)
     registered = fields.DatetimeField(null=False)
     last_online = fields.DatetimeField(null=False)
@@ -87,7 +87,7 @@ class Player(Model):
         table = "players"
 
     def __str__(self):
-        return self.name
+        return self.login
 
 
 class Organization(Model):
