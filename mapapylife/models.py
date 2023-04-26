@@ -18,6 +18,15 @@ class House(Model):
     expires = fields.DatetimeField(null=True)
     last_update = fields.DatetimeField(null=False, auto_now=True)
 
+    # Dict of fields to be updated from API
+    api_fields = {
+        "name": "title",
+        "owner_id": "owner",
+        "organization_id": "organization",
+        "price": "price",
+        "expires": "expires",
+    }
+
     class Meta:
         table = "houses"
 
@@ -83,6 +92,13 @@ class Player(Model):
     registered = fields.DatetimeField(null=False)
     last_online = fields.DatetimeField(null=False)
 
+    # Dict of fields to be updated from API
+    api_fields = {
+        "login": "login",
+        "premium": "premium",
+        "last_online": "last_online",
+    }
+
     class Meta:
         table = "players"
 
@@ -96,6 +112,13 @@ class Organization(Model):
     tag = fields.CharField(max_length=255, null=False)
     logo_url = fields.TextField(null=True)
     registered = fields.DatetimeField(null=False)
+
+    # Dict of fields to be updated from API
+    api_fields = {
+        "name": "name",
+        "tag": "tag",
+        "logo_url": "logo",
+    }
 
     class Meta:
         table = "organizations"
