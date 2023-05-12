@@ -92,7 +92,7 @@ async def update_houses():
 
         # Prepare default values
         defaults = {
-            "name": house.title,
+            "title": house.title,
             "owner_id": house.owner,
             "organization_id": house.organization,
             "price": house.price,

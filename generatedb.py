@@ -138,7 +138,7 @@ async def generate_houses(client: PylifeAPIClient):
             id=house.id,
             x=house.position.x,
             y=house.position.y,
-            name=house.title,
+            title=house.title,
             location_id=zone.id,
             owner_id=house.owner,
             organization_id=house.organization,

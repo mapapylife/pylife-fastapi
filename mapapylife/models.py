@@ -10,7 +10,7 @@ class House(Model):
     id = fields.IntField(pk=True)
     x = fields.FloatField(null=False)
     y = fields.FloatField(null=False)
-    name = fields.CharField(max_length=255, null=False)
+    title = fields.CharField(max_length=255, null=False)
     location = fields.ForeignKeyField("models.Zone", null=False)
     owner = fields.ForeignKeyField("models.Player", on_delete=fields.SET_NULL, null=True)
     organization = fields.ForeignKeyField("models.Organization", on_delete=fields.SET_NULL, null=True)
@@ -20,7 +20,7 @@ class House(Model):
 
     # Dict of fields to be updated from API
     api_fields = {
-        "name": "title",
+        "title": "title",
         "owner_id": "owner",
         "organization_id": "organization",
         "price": "price",
