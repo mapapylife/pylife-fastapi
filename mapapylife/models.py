@@ -14,7 +14,7 @@ class House(Model):
     location = fields.ForeignKeyField("models.Zone", null=False)
     owner = fields.ForeignKeyField("models.Player", on_delete=fields.SET_NULL, null=True)
     organization = fields.ForeignKeyField("models.Organization", on_delete=fields.SET_NULL, null=True)
-    price = fields.FloatField(null=True)
+    price = fields.DecimalField(max_digits=10, decimal_places=2, null=False)
     expires = fields.DatetimeField(null=True)
     last_update = fields.DatetimeField(null=False, auto_now=True)
 
