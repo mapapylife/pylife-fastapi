@@ -28,7 +28,7 @@ class House(Model):
     }
 
     class Meta:
-        table = "houses"
+        table = "map_houses"
 
     def __str__(self):
         return f"{self.id}. {self.name}"
@@ -42,7 +42,7 @@ class Blip(Model):
     icon = fields.CharField(max_length=255, null=False)
 
     class Meta:
-        table = "blips"
+        table = "map_blips"
 
     def __str__(self):
         return self.name
@@ -56,7 +56,7 @@ class Zone(Model):
     root = fields.ForeignKeyField("models.Zone", null=True)
 
     class Meta:
-        table = "zones"
+        table = "map_zones"
 
     @lru_cache
     def get_polygon(self) -> Union[Polygon, MultiPolygon]:
@@ -100,7 +100,7 @@ class Player(Model):
     }
 
     class Meta:
-        table = "players"
+        table = "map_players"
 
     def __str__(self):
         return self.login
@@ -121,7 +121,7 @@ class Organization(Model):
     }
 
     class Meta:
-        table = "organizations"
+        table = "map_organizations"
 
     def __str__(self):
         return self.name
