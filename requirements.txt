@@ -1,6 +1,7 @@
 aiohttp
 fastapi
 pylife-api
+python-dotenv
 python-rapidjson
 shapely
 tortoise-orm[asyncpg]

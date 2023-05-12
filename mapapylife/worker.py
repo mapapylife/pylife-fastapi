@@ -1,23 +1,20 @@
 import asyncio
 import logging
-import os
 import sys
 from datetime import datetime
 
 from pylife_api import PylifeAPIClient
 from tortoise import Tortoise, connections
 
+from mapapylife.config import get_settings
 from mapapylife.models import House, Organization, Player, Zone
-
-# Auth token
-auth_token = os.getenv("AUTH_TOKEN")
-
-# Database URL
-db_url = os.getenv("DB_URL", "sqlite://db.sqlite3")
 
 # Enable logging
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger("worker")
+
+# Get settings
+settings = get_settings()
 
 
 async def update_houses():
@@ -32,7 +29,7 @@ async def update_houses():
     organizations = await Organization.all().values_list("id", flat=True)
 
     # Get all houses from API
-    async with PylifeAPIClient(auth_token=auth_token) as client:
+    async with PylifeAPIClient(auth_token=settings.auth_token) as client:
         logger.info("Pulling houses from API...")
 
         for house in await client.get_houses():
@@ -128,7 +125,7 @@ async def update_players():
     players = {player.id: player for player in await Player.all()}
 
     # Get all players from API
-    async with PylifeAPIClient(auth_token=auth_token) as client:
+    async with PylifeAPIClient(auth_token=settings.auth_token) as client:
         logger.info("Pulling players from API...")
 
         for player in await client.get_players():
@@ -175,7 +172,7 @@ async def update_organizations():
     organizations = {organization.id: organization for organization in await Organization.all()}
 
     # Get all organizations from API
-    async with PylifeAPIClient(auth_token=auth_token) as client:
+    async with PylifeAPIClient(auth_token=settings.auth_token) as client:
         logger.info("Pulling organizations from API...")
 
         for organization in await client.get_organizations():
@@ -222,7 +219,7 @@ async def run_job(job_name: str):
     logger.info(f'Running job "{job_name}"...')
 
     # Connect to database
-    await Tortoise.init(db_url=db_url, modules={"models": ["mapapylife.models"]})
+    await Tortoise.init(db_url=settings.db_url, modules={"models": ["mapapylife.models"]})
 
     try:
         await globals()[job_name]()
