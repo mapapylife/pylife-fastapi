@@ -25,8 +25,8 @@ async def update_houses():
     houses = {house.id: house for house in await House.all()}
 
     # Prefetch player and organization IDs from database
-    players = await Player.all().values_list("id", flat=True)
-    organizations = await Organization.all().values_list("id", flat=True)
+    players = set(await Player.all().values_list("id", flat=True))
+    organizations = set(await Organization.all().values_list("id", flat=True))
 
     # Get all houses from API
     async with PylifeAPIClient(auth_token=settings.auth_token) as client:
