@@ -1,7 +1,7 @@
 import os
 import re
 
-import aiohttp
+from aiohttp import ClientSession
 from pylife_api import PylifeAPIClient
 from shapely.geometry import box
 from shapely.ops import unary_union
@@ -46,7 +46,7 @@ async def generate_zones():
             }
 
     # Download zone data from MTA repository
-    async with aiohttp.ClientSession() as session:
+    async with ClientSession() as session:
         async with session.get(MTA_ZONENAMES) as resp:
             resp.raise_for_status()
             response = await resp.text()
