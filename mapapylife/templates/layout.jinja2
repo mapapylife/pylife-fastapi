@@ -7,7 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="{% block description %}{% endblock %}">
     <meta name="author" content="David Sn, Encryptize, and GitHub contributors">
-    <meta name="generator" content="pylife-leaflet">
+    <meta name="generator" content="pylife-fastapi">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ self.title() }}">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="{{ self.description() }}">
+    <meta property="og:url" content="https://mapapy.life/">
+    <meta property="og:image" content="https://mapapy.life/static/favicon/apple-touch-icon.png">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', path='favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', path='favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', path='favicon/favicon-16x16.png') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', path='favicon/favicon.ico') }}">
+    <meta name="theme-color" content="#343a40">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url_for('static', path='css/bootstrap.min.css') }}">
@@ -17,15 +33,6 @@
     <link rel="stylesheet" href="{{ url_for('static', path='css/leaflet.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/leaflet-responsive-popup.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/map.css') }}">
-
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', path='favicon/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', path='favicon/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', path='favicon/favicon-16x16.png') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', path='favicon/favicon.ico') }}">
-    <meta name="theme-color" content="#343a40">
-
-    <title>{% block title %}{% endblock %}</title>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-54671102-5"></script>
@@ -83,7 +90,6 @@
     {% block content %}{% endblock %}
 
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Bootstrap JS -->
     <script type="text/javascript" src="{{ url_for('static', path='js/jquery-3.7.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', path='js/bootstrap.bundle.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', path='js/bootstrap3-typeahead.min.js') }}"></script>
