@@ -1,9 +1,11 @@
 aiohttp
 fastapi
+fastapi-limiter
 jinja2
 pylife-api
 python-dotenv
 python-rapidjson
+redis
 shapely
 tortoise-orm[asyncpg]
 uvicorn[standard]

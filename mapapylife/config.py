@@ -7,6 +7,7 @@ from pydantic import BaseSettings
 class Settings(BaseSettings):
     debug: bool = False
     db_url: str = "sqlite:///db.sqlite3"
+    redis_url: str = "redis://localhost:6379/"
     auth_token: Optional[str] = None
 
     class Config:
