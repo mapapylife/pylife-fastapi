@@ -3,6 +3,7 @@ from decimal import Decimal
 from typing import Any, List, Optional, Tuple, Union
 
 from pydantic import BaseModel, validator
+from pydantic.networks import HttpUrl
 
 Point = Tuple[int, int]
 Polygon = List[Point]
@@ -49,6 +50,32 @@ class BlipV1(BaseModel):
 
 class BlipsResponseV1(BaseModel):
     data: List[BlipV1]
+
+
+class EventV1(BaseModel):
+    id: int
+    x: float
+    y: float
+    name: str
+    location: str
+    description: str
+    start_date: Optional[datetime]
+    end_date: Optional[datetime]
+    post_url: HttpUrl
+
+    class Config:
+        orm_mode = True
+
+    @validator("location", pre=True)
+    def field_as_obj(cls, v):
+        if isinstance(v, str):
+            return v
+
+        return str(v)
+
+
+class EventsResponseV1(BaseModel):
+    data: List[EventV1]
 
 
 class ZoneV1(BaseModel):

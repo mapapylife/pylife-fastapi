@@ -2,9 +2,20 @@ from datetime import datetime
 from typing import Optional
 
 from fastapi import APIRouter
+from pypika import Parameter
+from tortoise.expressions import Q
 
-from mapapylife.api.v1.schemas import BlipV1, BlipsResponseV1, HouseV1, HousesResponseV1, ZoneV1, ZonesResponseV1
-from mapapylife.models import Blip, House, Zone
+from mapapylife.api.v1.schemas import (
+    BlipV1,
+    BlipsResponseV1,
+    EventV1,
+    EventsResponseV1,
+    HouseV1,
+    HousesResponseV1,
+    ZoneV1,
+    ZonesResponseV1,
+)
+from mapapylife.models import Blip, Event, House, Zone
 
 router = APIRouter(prefix="/points", tags=["points"])
 
@@ -45,6 +56,22 @@ async def get_blips(raw: bool = False) -> BlipsResponseV1:
         data.append(BlipV1.from_orm(blip))
 
     return BlipsResponseV1(data=data)
+
+
+@router.get("/events")
+async def get_events(raw: bool = False) -> EventsResponseV1:
+    """Get all events"""
+    events = await Event.filter(Q(end_date__gt=Parameter("NOW()")) | Q(end_date__isnull=True)).order_by("id").prefetch_related("location")
+    data = []
+
+    for event in events:
+        if not raw:
+            event.x = 3000 + event.x
+            event.y = 3000 - event.y
+
+        data.append(EventV1.from_orm(event))
+
+    return EventsResponseV1(data=data)
 
 
 @router.get("/zones")

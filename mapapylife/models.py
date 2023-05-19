@@ -48,6 +48,24 @@ class Blip(Model):
         return self.name
 
 
+class Event(Model):
+    id = fields.IntField(pk=True)
+    x = fields.FloatField(null=False)
+    y = fields.FloatField(null=False)
+    name = fields.CharField(max_length=255, null=False)
+    location = fields.ForeignKeyField("models.Zone", null=False)
+    description = fields.TextField(null=False)
+    start_date = fields.DatetimeField(null=True)
+    end_date = fields.DatetimeField(null=True)
+    post_url = fields.TextField(null=False)
+
+    class Meta:
+        table = "map_events"
+
+    def __str__(self):
+        return self.name
+
+
 class Zone(Model):
     id = fields.IntField(pk=True)
     name = fields.CharField(max_length=255, null=False)
