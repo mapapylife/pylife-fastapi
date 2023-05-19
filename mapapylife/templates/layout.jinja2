@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta name="author" content="David Sn, Encryptize, and GitHub contributors">
+    <meta name="generator" content="pylife-leaflet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', path='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/fork-awesome.min.css') }}">
+
+    <!-- Mapa PYLife.pl -->
+    <link rel="stylesheet" href="{{ url_for('static', path='css/leaflet.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/leaflet-responsive-popup.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/map.css') }}">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', path='favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', path='favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', path='favicon/favicon-16x16.png') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', path='favicon/favicon.ico') }}">
+    <meta name="theme-color" content="#343a40">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-54671102-5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+
+        gtag('js', new Date());
+        gtag('config', 'UA-54671102-5');
+    </script>
+</head>
+
+<body>
+    <!-- Site navigation -->
+    <header class="navbar navbar-expand-md navbar-dark sticky-top bg-dark shadow">
+        <h1 class="navbar-brand mb-0 mr-3">
+            <img src="{{ url_for('static', path='images/logo.svg') }}" width="auto" height="30" alt="Mapa PY.Life">
+        </h1>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <!-- Search form -->
+            <form class="form-inline my-2 my-md-0" onsubmit="return false">
+                <div class="input-group">
+                    <input class="form-control" id="search" type="text" name="search" placeholder="Szukaj na mapie..." autocomplete="off">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-light" id="submit" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Links -->
+            <ul class="navbar-nav ml-auto visible-md">
+                <!-- GitHub repo -->
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/mapapylife"><i class="fa fa-github fa-fw"></i> GitHub</a>
+                </li>
+
+                <!-- Twitter social profile -->
+                <li class="nav-item">
+                    <a class="nav-link" href="https://twitter.com/divadsn"><i class="fa fa-twitter fa-fw"></i> Twitter</a>
+                </li>
+
+                <!-- Panel Play Your Life -->
+                <li class="nav-item">
+                    <a class="nav-link" href="https://panel.pylife-rpg.pl"><i class="fa fa-sign-out fa-fw"></i> Panel PYLife</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Bootstrap JS -->
+    <script type="text/javascript" src="{{ url_for('static', path='js/jquery-3.7.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', path='js/bootstrap.bundle.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', path='js/bootstrap3-typeahead.min.js') }}"></script>
+
+    <!-- Mapa PYLife.pl -->
+    <script type="text/javascript" src="{{ url_for('static', path='js/leaflet.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', path='js/leaflet-rastercoords.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', path='js/leaflet-responsive-popup.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', path='js/dayjs.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', path='js/map.js') }}"></script>
+</body>
+
+</html>

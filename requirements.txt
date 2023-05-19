@@ -1,5 +1,6 @@
 aiohttp
 fastapi
+jinja2
 pylife-api
 python-dotenv
 python-rapidjson

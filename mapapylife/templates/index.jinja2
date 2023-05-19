@@ -1,0 +1,70 @@
+{% extends "layout.jinja2" %}
+
+{% block title %}Mapa Play Your Life{% endblock %}
+{% block description %}Interaktywna mapa serwera Play Your Life v2, sprawdź Twój cel oraz zobacz dostępne domy.{% endblock %}
+
+{% block content %}
+    <!-- Page content -->
+    <main style="height: calc(100vh - 57.5px);">
+        <div class="h-100" id="map"></div>
+    </main>
+
+    <!-- Welcome modal -->
+    <div class="modal fade" data-backdrop="static" id="welcome" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <!-- Logo Play Your Life -->
+                    <h2>Witaj na interaktywnej mapie Play Your Life!</h2>
+                    <hr>
+
+                    <!-- Feature: Search engine -->
+                    <h5>Sprawdź Twój cel na mapie oraz zobacz dostępne domki w wybranej okolicy.</h5>
+                    <p class="mb-4">
+                        Wyszukiwarka w górnym pasku pomoże Ci znaleźć każdy zakątek tej mapy, wystarczy wpisać pierwszą część nazwy celu, a mapa pokaże Ci wybrany obszar na mapie.
+                        Ułatwi to nie tylko początkującym graczom poruszanie się po San Andreas, ale także pomoże graczom w pracy na taksówce lub kurierce.
+                    </p>
+
+                    <!-- Feature: Regular updates -->
+                    <h5>Jak są regularnie aktualizowane informacje o domkach?</h5>
+                    <p class="mb-4">
+                        Serwer aktualizuje dane regularnie co minutę dla wszystkich domów, podczas gdy nicki graczy i organizacje są aktualizowane co godzinę, aby uniknąć obciążenia.
+                    </p>
+
+                    <!-- About project: Authors -->
+                    <h5>Autorzy i użyte technologie</h5>
+                    <p>
+                        Mapa PY.Life, wersja 2.0<br />
+                        Projekt wspólny graczy <a href="https://panel.pylife-rpg.pl/gracz/?id=8" target="_blank">divadsn</a> (David Sn) i <a href="https://panel.pylife-rpg.pl/gracz/?id=15" target="_blank">Encryptize</a>.
+                    </p>
+                    <p>
+                        Dane lokalizacyjne z gry MTA zostały wykorzystane na <a href="https://github.com/multitheftauto/mtasa-blue/blob/master/LICENSE" target="_blank">licencji open-source</a> GPLv3.
+                    </p>
+
+                    <!-- About project: Used technologies -->
+                    <h6>Strona została zbudowana przy użyciu technologii:</h6>
+                    <ul>
+                        <li>Python 3.11</li>
+                        <li>FastAPI</li>
+                        <li>PostgreSQL</li>
+                        <li>Leaflet.js</li>
+                        <li>jQuery</li>
+                    </ul>
+
+                    <!-- GDPR / Cookie consent -->
+                    <p class="mb-0">
+                        Ta strona korzysta z ciasteczek aby świadczyć usługi na najwyższym poziomie.<br />
+                        Dalsze korzystanie ze strony oznacza, że zgadzasz się na ich użycie.
+                    </p>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="togglemusic" type="button">Wyłącz muzykę</button>
+                    <button class="btn btn-success" id="accept" type="button">Akceptuję</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

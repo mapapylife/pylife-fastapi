@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Mapa PYLife.pl -->
+    <link rel="stylesheet" href="{{ url_for('static', path='css/fork-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/leaflet.css') }}">
+
+    <!-- Widget style -->
+    <style>
+        html, body, #map {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        dt {
+            font-weight: 700;
+        }
+
+        dd {
+            margin-bottom: .5rem;
+            margin-left: 0;
+        }
+
+        a {
+            text-decoration: none;
+            background-color: transparent;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <title>Mapa Play Your Life</title>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <!-- Mapa PYLife.pl -->
+    <script type="text/javascript"  src="{{ url_for('static', path='js/leaflet.js') }}"></script>
+    <script type="text/javascript"  src="{{ url_for('static', path='js/leaflet-rastercoords.js') }}"></script>
+
+    <!-- Widget script -->
+    <script type="text/javascript">
+        // create the map
+        var map = L.map('map', {zoomControl: false});
+
+        // assign map and image dimensions
+        var rc = new L.RasterCoords(map, [6000, 6000]);
+
+        // the tile layer containing the image generated with gdal2tiles.py
+        L.tileLayer('https://mapapylife.github.io/tilemap/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://panel.pylife-rpg.pl/">Play Your Life</a>, Imagery &copy; <a href="https://github.com/Patrick2562/mtasa-map-images/">Patrick2562</a>',
+            noWrap: true
+        }).addTo(map);
+
+        // house marker data
+        var house = {{ data | safe }};
+
+        function getHouseIcon(house) {
+            if (house.owner) {
+                return L.icon({iconUrl: '/static/icons/Icon_32.png', iconSize: [16, 16]});
+            } else {
+                return L.icon({iconUrl: '/static/icons/Icon_31.png', iconSize: [16, 16]});
+            }
+        }
+
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2)
+                month = '0' + month;
+
+            if (day.length < 2)
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
+        // popup text based on ownership data
+        var popupText = '<dl><dt>' + house.id  + '. ' + house.title + '</dt><dd>' + house.location + '</dd>';
+
+        if (house.owner) {
+            popupText += '<dt><i class="fa fa-user fa-fw"></i> Właściciel:</dt><dd>' + house.owner + '</dd>' +
+                '<dt><i class="fa fa-money fa-fw"></i> Cena:</dt><dd>' + house.price + '€ za dobę</dd>' +
+                '<dt><i class="fa fa-calendar fa-fw"></i> Wynajęty do:</dt><dd>' + formatDate(house.expires) + '</dd>';
+        } else {
+            popupText += '<dd>Do wynajęcia!<dd>' +
+                '<dt><i class="fa fa-money fa-fw"></i> Cena:</dt><dd>' + house.price + '€ za dobę</dd>';
+        }
+
+        var marker = L.marker(rc.unproject([house.x, house.y]), {icon: getHouseIcon(house)});
+        marker.bindPopup(popupText).addTo(map);
+
+        map.setMaxBounds(); // disable max bounds from rastercoords plugin
+
+        // disable ANY leaflet interaction
+        map._handlers.forEach(function(handler) {
+            handler.disable();
+        });
+
+        map.on('popupopen', function(e) {
+            var px = map.project(e.target._popup._latlng); // find the pixel location on the map where the popup anchor is
+            px.y -= e.target._popup._container.clientHeight / 2; // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
+            map.panTo(map.unproject(px), {animate: true}); // pan to new center
+        });
+
+        map.on('popupclose', function(e) {
+            map.panTo(e.popup.getLatLng(), {animate: true});
+        });
+
+        map.setView(marker.getLatLng(), 5);
+    </script>
+</body>
+
+</html>
