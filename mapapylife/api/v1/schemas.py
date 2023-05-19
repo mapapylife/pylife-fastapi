@@ -29,7 +29,7 @@ class HouseV1(BaseModel):
         if isinstance(v, str):
             return v
 
-        return str(v)
+        return str(v) if v else None
 
 
 class HousesResponseV1(BaseModel):
@@ -71,7 +71,7 @@ class EventV1(BaseModel):
         if isinstance(v, str):
             return v
 
-        return str(v)
+        return str(v) if v else None
 
 
 class EventsResponseV1(BaseModel):
