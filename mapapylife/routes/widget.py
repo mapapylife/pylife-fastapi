@@ -1,7 +1,7 @@
 import json
 
 from fastapi import APIRouter, HTTPException, Request, Response
-from starlette.templating import Jinja2Templates
+from fastapi.templating import Jinja2Templates
 
 from mapapylife.models import House
 

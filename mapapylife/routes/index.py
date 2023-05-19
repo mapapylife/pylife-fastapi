@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Request, Response
-from starlette.templating import Jinja2Templates
+from fastapi.templating import Jinja2Templates
 
 router = APIRouter()
 templates = Jinja2Templates(directory="mapapylife/templates")
