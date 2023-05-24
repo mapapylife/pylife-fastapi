@@ -1,11 +1,12 @@
 import os
 import re
+from typing import List
 
 from aiohttp import ClientSession
 from pylife_api import PylifeAPIClient
 from shapely.geometry import box
 from shapely.ops import unary_union
-from tortoise import Tortoise, run_async
+from tortoise import Tortoise, connections, run_async
 
 from mapapylife.models import Blip, House, Player, Organization, Zone
 
@@ -168,6 +169,10 @@ async def run():
     # Connect to database and generate schemas
     await Tortoise.init(db_url=db_url, modules={"models": ["mapapylife.models"]})
     await Tortoise.generate_schemas()
+
+    # Run raw SQL queries from file
+    with open("mapapylife.sql", encoding="utf-8") as f:
+        await Tortoise.get_connection("default").execute_script(f.read())
 
     # Generate zones
     await generate_zones()
