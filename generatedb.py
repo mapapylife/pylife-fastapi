@@ -1,6 +1,5 @@
 import os
 import re
-from typing import List
 
 from aiohttp import ClientSession
 from pylife_api import PylifeAPIClient
@@ -172,7 +171,7 @@ async def run():
 
     # Run raw SQL queries from file
     with open("mapapylife.sql", encoding="utf-8") as f:
-        await Tortoise.get_connection("default").execute_script(f.read())
+        await connections.get("default").execute_script(f.read())
 
     # Generate zones
     await generate_zones()
@@ -188,7 +187,7 @@ async def run():
     await generate_blips()
 
     # Close database connection
-    await Tortoise.close_connections()
+    await connections.close_all()
 
 
 if __name__ == "__main__":
