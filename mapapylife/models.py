@@ -6,6 +6,28 @@ from tortoise.models import Model
 from tortoise import fields
 
 
+def get_search_query(*args: str) -> str:
+    raw_query = (
+        "SELECT id, name, group_, tsv, "
+        "similarity(name, $1) AS similarity, ts_headline('simple', name, query) AS highlighted FROM ("
+    )
+
+    # args contain table names, so we can use them to build the query
+    for i, index in enumerate(args):
+        raw_query += (
+            f"SELECT id, name, '{index}' AS group_, tsv, CASE WHEN $1 = '' THEN '' "
+            f"ELSE to_tsquery('simple', CAST(plainto_tsquery('simple', $1) AS text) || ':*') "
+            f"END AS query FROM map_index_{index}"
+        )
+
+        # Add UNION ALL if not last index
+        if i < len(args) - 1:
+            raw_query += " UNION ALL "
+
+    raw_query += ") AS combined WHERE tsv @@ query ORDER BY similarity DESC LIMIT $2;"
+    return raw_query
+
+
 class House(Model):
     id = fields.IntField(pk=True)
     x = fields.FloatField(null=False)

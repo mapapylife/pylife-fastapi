@@ -1,3 +1,7 @@
+-- Enable pg_trgm extension
+-- This requires postgresql-contrib package to be installed!
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+
 -- Table: map_index_houses
 CREATE TABLE IF NOT EXISTS map_index_houses (
     id SERIAL PRIMARY KEY,
@@ -23,7 +27,7 @@ BEGIN
 
         -- Assign values from new row
         new_name := NEW.id || '. ' || NEW.title || ' (' || location_name || ')';
-        new_tsv := to_tsvector('simple', NEW.id || ' ' || NEW.title || ' ' || location_name);
+        new_tsv := to_tsvector('simple', new_name);
 
         -- Insert or update row in index table
         INSERT INTO map_index_houses (id, name, tsv)
@@ -55,14 +59,25 @@ CREATE INDEX map_index_zones_tsv_idx
 
 -- Function: update_index_zones()
 CREATE OR REPLACE FUNCTION update_index_zones() RETURNS trigger AS $$
+DECLARE
+    location_name text;
+    new_name text;
 BEGIN
     -- Check if row has changed or is new
-    IF (OLD IS NULL OR OLD.name <> NEW.name) THEN
+    IF (OLD IS NULL OR OLD.name <> NEW.name OR OLD.root_id IS DISTINCT FROM NEW.root_id) THEN
+        new_name := NEW.name;
+
+        -- Append root zone name if exists
+        IF (NEW.root_id IS NOT NULL) THEN
+            SELECT name INTO location_name FROM map_zones WHERE id = NEW.root_id;
+            new_name := new_name || ', ' || location_name;
+        END IF;
+
         -- Insert or update row in index table
         INSERT INTO map_index_zones (id, name, tsv)
-            VALUES (NEW.id, NEW.name, to_tsvector('simple', NEW.name))
+            VALUES (NEW.id, new_name, to_tsvector('simple', new_name))
             ON CONFLICT (id)
-            DO UPDATE SET name = NEW.name, tsv = to_tsvector('simple', NEW.name);
+            DO UPDATE SET name = new_name, tsv = to_tsvector('simple', new_name);
     END IF;
     RETURN NULL;
 END;

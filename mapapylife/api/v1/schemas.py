@@ -2,7 +2,7 @@ from datetime import datetime
 from decimal import Decimal
 from typing import Any, List, Optional, Tuple, Union
 
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, Field, validator
 from pydantic.networks import HttpUrl
 
 Point = Tuple[int, int]
@@ -92,14 +92,6 @@ class ZonesResponseV1(BaseModel):
     data: List[ZoneV1]
 
 
-class ZoneResultV1(BaseModel):
-    id: int
-    name: str
-
-    class Config:
-        orm_mode = True
-
-
 class LookupResultV1(BaseModel):
     zone_name: Optional[str]
     city_name: Optional[str]
@@ -112,3 +104,14 @@ class LookupResultV1(BaseModel):
         obj.zone_name = obj.name if obj.root else None
         obj.city_name = obj.root.name if obj.root else obj.name
         return super().from_orm(obj)
+
+
+class SearchResultV1(BaseModel):
+    id: int
+    name: str
+    group_: str = Field(alias="group")
+    similarity: float
+    highlighted: str
+
+    class Config:
+        allow_population_by_field_name = True

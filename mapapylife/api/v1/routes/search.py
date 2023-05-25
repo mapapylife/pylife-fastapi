@@ -1,20 +1,21 @@
-from typing import List
+from typing import Annotated, List
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
+from tortoise.transactions import in_transaction
 
-from mapapylife.api.v1.schemas import ZoneResultV1
-from mapapylife.models import Zone
+from mapapylife.api.v1.schemas import SearchResultV1
+from mapapylife.models import get_search_query
 
 router = APIRouter(prefix="/search", tags=["search"])
 
 
 @router.get("/")
-async def search(query: str) -> List[ZoneResultV1]:
-    """Search for zones by name"""
-    zones = await Zone.filter(name__icontains=query).order_by("id").limit(10)
-    results = []
-
-    for zone in zones:
-        results.append(ZoneResultV1.from_orm(zone))
+async def search(query: str, limit: Annotated[int, Query(ge=1, le=100)] = 10) -> List[SearchResultV1]:
+    """Search for zones and houses by name"""
+    async with in_transaction() as conn:
+        results = await conn.execute_query_dict(
+            get_search_query("zones", "houses"),
+            [query, limit],
+        )
 
     return results
