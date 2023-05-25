@@ -70,19 +70,52 @@ function setupTypeahead() {
         delay: 200,
         theme: 'bootstrap4',
         fitToElement: true,
+        selectOnBlur: false,
         changeInputOnSelect: false,
         changeInputOnMove: false,
         source: function(query, process) {
-            $.get('/api/v1/search/?query=' + query, function(data) {
-                return process(data);
+            $.get('/api/v1/search/?query=' + encodeURI(query.trim().toLowerCase()), function(data) {
+                process(data);
             });
+        },
+        matcher: function(item) {
+            // check if query keywords are contained in item
+            var keywords = this.query.split(' ');
+            var match = true;
+
+            keywords.forEach(function(keyword) {
+                if (item.name.toLowerCase().indexOf(keyword.toLowerCase()) === -1) {
+                    match = false;
+                }
+            });
+
+            return match;
+        },
+        highlighter: function(text, item) {
+            return typeof item !== 'undefined' && typeof item.highlighted != 'undefined' ? item.highlighted : text;
+        },
+        icon: function(item) {
+            switch (item.group) {
+                case 'zones':
+                    return '<i class="fa fa-map-marker fa-fw"></i> ';
+                case 'houses':
+                    return '<i class="fa fa-home fa-fw"></i> ';
+                case 'jobs':
+                    return '<i class="fa fa-briefcase fa-fw"></i> ';
+                default:
+                    return '<i class="fa fa-question-circle fa-fw"></i> ';
+            }
         },
         afterSelect: function(item) {
             // if item was selected on dropdown
             if ($('.typeahead').is(':visible')) {
-                // fly to bounds and show zone
-                var zone = markers.zones[item.id];
-                showZoneOnMap(zone);
+                if (item.group === 'zones') {
+                    var zone = markers.zones[item.id];
+                    showZoneOnMap(zone);
+                } else if (item.group === 'houses') {
+                    var house = markers.houses[item.id];
+                    showHouseOnMap(house);
+                }
             }
 
             // close navbar on mobile devices
@@ -233,6 +266,16 @@ function showZoneOnMap(zone) {
         polygon.on('popupclose', function() {
             map.removeLayer(polygon);
         });
+    });
+}
+
+function showHouseOnMap(house) {
+    var marker = layers.houses.getLayer(house.layer);
+    map.closePopup();
+
+    map.flyTo(marker.getLatLng());
+    map.once('moveend', function() {
+        marker.openPopup();
     });
 }
 
