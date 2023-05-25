@@ -1,6 +1,8 @@
 -- Enable pg_trgm extension
--- This requires postgresql-contrib package to be installed!
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
+
+-- Fix timestamp precision for last_update
+ALTER TABLE map_houses ALTER last_update TYPE timestamptz(0);
 
 -- Table: map_index_houses
 CREATE TABLE IF NOT EXISTS map_index_houses (

@@ -304,7 +304,7 @@ function loadData() {
                 location: house.location,
                 owner: house.owner,
                 price: house.price,
-                layer: layers.zones.getLayerId(layer)
+                layer: layers.houses.getLayerId(layer)
             };
         });
 
@@ -353,7 +353,7 @@ function formatDate(timestamp) {
 
 
 function parseTimestamp(timestamp) {
-    return new Date(timestamp).getTime() / 1000;
+    return parseInt(new Date(timestamp).getTime() / 1000, 10);
 }
 
 
@@ -391,10 +391,42 @@ function init() {
     // load all map data
     loadData();
 
-    // check every 5 minutes for updates
+    // check every minute for updates
     setInterval(function() {
-        console.log('TODO: Check for updates');
-    }, 30000);
+        $.getJSON('/api/v1/points/houses?last_update=' + last_update, function(json) {
+            var refresh = false;
+
+            // update last update timestamp
+            last_update = json.last_update !== undefined ? parseTimestamp(json.last_update) : last_update;
+
+            // update house markers
+            json.data.forEach(function(house) {
+                var marker = null;
+
+                if (markers.houses[house.id]) {
+                    marker = layers.houses.getLayer(markers.houses[house.id].layer);
+                    marker.setIcon(getHouseIcon(house));
+                    marker.setPopupContent(getHousePopupText(house));
+                } else {
+                    marker = createHouseMarker(house).addTo(layers.houses);
+                    refresh = true;
+                }
+
+                markers.houses[house.id] = {
+                    name: house.name,
+                    location: house.location,
+                    owner: house.owner,
+                    price: house.price,
+                    layer: layers.houses.getLayerId(marker)
+                };
+            });
+
+            // refresh if houses were updated
+            if (refresh) {
+                checkVisibility('houses');
+            }
+        });
+    }, 60000);
 }
 
 

@@ -26,7 +26,7 @@ async def get_houses(raw: bool = False, last_update: Optional[datetime] = None) 
     houses = House.all().order_by("id").prefetch_related("location", "owner")
 
     if last_update:
-        houses = houses.filter(last_update__gte=last_update)
+        houses = houses.filter(last_update__gt=last_update)
 
     houses = await houses
     data = []
