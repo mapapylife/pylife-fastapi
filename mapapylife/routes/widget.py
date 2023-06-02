@@ -1,6 +1,11 @@
-import json
+from typing import Annotated
 
-from fastapi import APIRouter, HTTPException, Request, Response
+try:
+    import rapidjson as json
+except ImportError:
+    import json
+
+from fastapi import APIRouter, HTTPException, Request, Response, Query
 from fastapi.templating import Jinja2Templates
 
 from mapapylife.models import House
@@ -10,7 +15,7 @@ templates = Jinja2Templates(directory="mapapylife/templates")
 
 
 @router.get("/{house_id}", include_in_schema=False)
-async def get_house(request: Request, house_id: int) -> Response:
+async def get_house(request: Request, house_id: int, zoom: Annotated[int, Query(ge=0, le=7)] = 5) -> Response:
     house = await House.get_or_none(id=house_id).prefetch_related("location", "owner")
 
     if not house:
@@ -27,4 +32,11 @@ async def get_house(request: Request, house_id: int) -> Response:
         "expires": house.expires,
     }
 
-    return templates.TemplateResponse("widget.jinja2", context={"request": request, "data": json.dumps(data, default=str)})
+    return templates.TemplateResponse(
+        "widget.jinja2",
+        context={
+            "request": request,
+            "data": json.dumps(data, default=str),
+            "zoom": zoom,
+        },
+    )
