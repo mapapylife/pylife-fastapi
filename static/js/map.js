@@ -13,13 +13,12 @@ function setupLeaflet() {
     map = L.map('map');
 
     // assign map and image dimensions
-    rc = new L.RasterCoords(map, [6000, 6000]);
+    rc = new L.RasterCoords(map, [6000, 6000], 5.415);
 
     // set max zoom Level (might be `x` if gdal2tiles was called with `-z 0-x` option)
-    map.setMaxZoom(6);
+    map.setMaxZoom(7);
 
-    // all coordinates need to be unprojected using the `unproject` method
-    // set the view in the lower right edge of the image
+    // set the view in the center of the image
     map.setView(rc.unproject([3000, 3000]), 4);
 
     // the tile layer containing the image generated with gdal2tiles.py
@@ -160,8 +159,8 @@ function getZonePopupText(zone) {
         });
 
         var averagePrice = parseFloat(total / houses.length).toFixed(2);
-        popupText += '<dt><i class="fa fa-home fa-fw"></i> Ilość domów:</dt><dd>' + available + '/' + houses.length + ' dostępne';
-        popupText += '<dt><i class="fa fa-money fa-fw"></i> Średnia cena:</dt><dd>' + formatPrice(averagePrice) + '€ za dobę</dd>';
+        popupText += '<dt><i class="fa fa-home fa-fw"></i> Ilość domów:</dt><dd>' + available + '/' + houses.length + ' dostępne</dd>';
+        popupText += '<dt><i class="fa fa-money fa-fw"></i> Średnia cena:</dt><dd>' + formatPrice(averagePrice) + '€ za dobę</dd></dl>';
     } else {
         popupText += '<dd>Brak domów na wynajem!</dd></dl>';
     }
@@ -182,6 +181,7 @@ function getHousePopupText(house) {
         popupText += '<dt><i class="fa fa-money fa-fw"></i> Cena:</dt><dd>' + house.price + '€ za dobę</dd>';
     }
 
+    popupText += '</dl>';
     return popupText;
 }
 
@@ -396,8 +396,8 @@ function init() {
         $.getJSON('/api/v1/points/houses?last_update=' + last_update, function(json) {
             var refresh = false;
 
-            // update last update timestamp
-            last_update = json.last_update !== undefined ? parseTimestamp(json.last_update) : last_update;
+            // update last update timestamp if last_update is not null
+            last_update = json.last_update ? parseTimestamp(json.last_update) : last_update;
 
             // update house markers
             json.data.forEach(function(house) {
