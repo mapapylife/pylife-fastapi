@@ -39,7 +39,7 @@ function setupLeaflet() {
     var themeButton = L.easyButton({
         states: [{
             stateName: 'night',
-            icon: 'fa-moon fa-lg',
+            icon: 'fa-solid fa-moon fa-fw fa-lg',
             title: 'Mapa nocna',
             onClick: function(btn, map) {
                 localStorage.setItem('theme', 'night');
@@ -51,7 +51,7 @@ function setupLeaflet() {
             }
         }, {
             stateName: 'day',
-            icon: 'fa-sun fa-lg',
+            icon: 'fa-solid fa-sun fa-fw fa-lg',
             title: 'Mapa dzienna',
             onClick: function(btn, map) {
                 localStorage.setItem('theme', 'day');
@@ -142,13 +142,13 @@ function setupTypeahead() {
         icon: function(item) {
             switch (item.group) {
                 case 'zones':
-                    return '<i class="fa fa-map-marker fa-fw"></i> ';
+                    return '<i class="fa-solid fa-location-dot fa-fw"></i> ';
                 case 'houses':
-                    return '<i class="fa fa-home fa-fw"></i> ';
+                    return '<i class="fa-solid fa-house fa-fw"></i> ';
                 case 'jobs':
-                    return '<i class="fa fa-briefcase fa-fw"></i> ';
+                    return '<i class="fa-solid fa-briefcase fa-fw"></i> ';
                 default:
-                    return '<i class="fa fa-question-circle fa-fw"></i> ';
+                    return '<i class="fa-solid fa-circle-question fa-fw"></i> ';
             }
         },
         afterSelect: function(item) {
@@ -205,8 +205,8 @@ function getZonePopupText(zone) {
         });
 
         var averagePrice = parseFloat(total / houses.length).toFixed(2);
-        popupText += '<dt><i class="fa fa-home fa-fw"></i> Ilość domów:</dt><dd>' + available + '/' + houses.length + ' dostępne</dd>';
-        popupText += '<dt><i class="fa fa-money fa-fw"></i> Średnia cena:</dt><dd>' + formatPrice(averagePrice) + '€ za dobę</dd></dl>';
+        popupText += '<dt><i class="fa-solid fa-house fa-fw"></i> Ilość domów:</dt><dd>' + available + '/' + houses.length + ' dostępne</dd>';
+        popupText += '<dt><i class="fa-regular fa-money-bill-1 fa-fw"></i> Średnia cena:</dt><dd>' + formatPrice(averagePrice) + '€ za dobę</dd></dl>';
     } else {
         popupText += '<dd>Brak domów na wynajem!</dd></dl>';
     }
@@ -219,12 +219,12 @@ function getHousePopupText(house) {
     var popupText = '<dl><dt>' + house.id  + '. ' + house.title + '</dt><dd>' + house.location + '</dd>';
 
     if (house.owner) {
-        popupText += '<dt><i class="fa fa-user fa-fw"></i> Właściciel:</dt><dd>' + house.owner + '</dd>';
-        popupText += '<dt><i class="fa fa-money fa-fw"></i> Cena:</dt><dd>' + formatPrice(house.price) + '€ za dobę</dd>';
-        popupText += '<dt><i class="fa fa-calendar fa-fw"></i> Wynajęty do:</dt><dd>' + formatDate(house.expires) + '</dd>';
+        popupText += '<dt><i class="fa-solid fa-user fa-fw"></i> Właściciel:</dt><dd>' + house.owner + '</dd>';
+        popupText += '<dt><i class="fa-regular fa-money-bill-1 fa-fw"></i> Cena:</dt><dd>' + formatPrice(house.price) + '€ za dobę</dd>';
+        popupText += '<dt><i class="fa-solid fa-calendar-days fa-fw"></i> Wynajęty do:</dt><dd>' + formatDate(house.expires) + '</dd>';
     } else {
         popupText += '<dd>Do wynajęcia!<dd>';
-        popupText += '<dt><i class="fa fa-money fa-fw"></i> Cena:</dt><dd>' + house.price + '€ za dobę</dd>';
+        popupText += '<dt><i class="fa-regular fa-money-bill-1 fa-fw"></i> Cena:</dt><dd>' + house.price + '€ za dobę</dd>';
     }
 
     popupText += '</dl>';
@@ -234,10 +234,10 @@ function getHousePopupText(house) {
 
 function getEventPopupText(event) {
     var popupText = '<dl><dt>' + event.name + '</dt><dd>' + event.location + '</dd>' +
-        '<dt><i class="fa fa-info fa-fw"></i> Opis wydarzenia:</dt><dd>' + event.description + '</dd>';
+        '<dt><i class="fa-solid fa-info fa-fw"></i> Opis wydarzenia:</dt><dd>' + event.description + '</dd>';
 
     if (event.start_date) {
-        popupText += '<dt><i class="fa fa-calendar-check-o fa-fw"></i> Czas trwania:</dt><dd>Od ' + formatDate(event.start_date) + ' do ';
+        popupText += '<dt><i class="fa-regular fa-calendar-check fa-fw"></i> Czas trwania:</dt><dd>Od ' + formatDate(event.start_date) + ' do ';
 
         if (event.end_date) {
             popupText +=  formatDate(event.end_date);
