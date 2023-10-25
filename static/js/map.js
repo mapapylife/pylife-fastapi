@@ -35,31 +35,43 @@ function setupLeaflet() {
         })
     };
 
-    // add day tilemap by default
-    tilemaps.day.addTo(map);
-
-    // create state changing button
-    L.easyButton({
+    // create theme state changing button
+    var themeButton = L.easyButton({
         states: [{
             stateName: 'night',
-            icon: 'fa-moon-o',
+            icon: 'fa-moon fa-lg',
             title: 'Mapa nocna',
             onClick: function(btn, map) {
-                map.removeLayer(tilemaps.day);
+                localStorage.setItem('theme', 'night');
                 tilemaps.night.addTo(map);
                 btn.state('day');
+                setTimeout(function() {
+                    tilemaps.day.remove();
+                }, 300);
             }
         }, {
             stateName: 'day',
-            icon: 'fa-sun-o',
+            icon: 'fa-sun fa-lg',
             title: 'Mapa dzienna',
             onClick: function(btn, map) {
-                map.removeLayer(tilemaps.night);
+                localStorage.setItem('theme', 'day');
                 tilemaps.day.addTo(map);
                 btn.state('night');
+                setTimeout(function() {
+                    tilemaps.night.remove();
+                }, 300);
             }
         }]
     }).addTo(map);
+
+    // add tilemap based on state in local storage
+    if (localStorage.getItem('theme') === 'night') {
+        tilemaps.night.addTo(map);
+        themeButton.state('day');
+    } else {
+        tilemaps.day.addTo(map);
+        themeButton.state('night');
+    }
 
     // layer groups
     layers = {
