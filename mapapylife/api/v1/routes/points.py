@@ -23,7 +23,7 @@ router = APIRouter(prefix="/points", tags=["points"])
 @router.get("/houses")
 async def get_houses(raw: bool = False, last_update: Optional[datetime] = None) -> HousesResponseV1:
     """Get all houses"""
-    houses = House.all().order_by("id").prefetch_related("location", "owner")
+    houses = House.all().order_by("id").prefetch_related("location", "location__root", "owner", "organization")
 
     if last_update:
         houses = houses.filter(last_update__gt=last_update)
@@ -61,7 +61,7 @@ async def get_blips(raw: bool = False) -> BlipsResponseV1:
 @router.get("/events")
 async def get_events(raw: bool = False) -> EventsResponseV1:
     """Get all events"""
-    events = await Event.filter(Q(end_date__gt=Parameter("NOW()")) | Q(end_date__isnull=True)).order_by("id").prefetch_related("location")
+    events = await Event.filter(Q(end_date__gt=Parameter("NOW()")) | Q(end_date__isnull=True)).order_by("id").prefetch_related("location", "location__root")
     data = []
 
     for event in events:

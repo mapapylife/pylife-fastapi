@@ -10,26 +10,56 @@ Polygon = List[Point]
 MultiPolygon = List[Polygon]
 
 
+class LocationV1(BaseModel):
+    id: int
+    name: str
+    root: Optional[str] = Field(alias="root_name")
+
+    class Config:
+        orm_mode = True
+        allow_population_by_field_name = True
+
+    @validator("root", pre=True)
+    def field_as_obj(cls, v):
+        if isinstance(v, str):
+            return v
+
+        return str(v) if v else None
+
+
+class OwnerV1(BaseModel):
+    id: int
+    login: str = Field(alias="name")
+    premium: Optional[datetime]
+
+    class Config:
+        orm_mode = True
+        allow_population_by_field_name = True
+
+
+class OrganizationV1(BaseModel):
+    id: int
+    name: str
+    logo_url: Optional[HttpUrl]
+
+    class Config:
+        orm_mode = True
+
+
 class HouseV1(BaseModel):
     id: int
     x: float
     y: float
     title: str
-    location: str
-    owner: Optional[str]
+    location: LocationV1
+    owner: Optional[OwnerV1]
+    organization: Optional[OrganizationV1]
     price: Optional[Decimal]
     expires: Optional[datetime]
     last_update: datetime
 
     class Config:
         orm_mode = True
-
-    @validator("location", "owner", pre=True)
-    def field_as_obj(cls, v):
-        if isinstance(v, str):
-            return v
-
-        return str(v) if v else None
 
 
 class HousesResponseV1(BaseModel):
@@ -57,7 +87,7 @@ class EventV1(BaseModel):
     x: float
     y: float
     name: str
-    location: str
+    location: LocationV1
     description: str
     start_date: Optional[datetime]
     end_date: Optional[datetime]
@@ -65,13 +95,6 @@ class EventV1(BaseModel):
 
     class Config:
         orm_mode = True
-
-    @validator("location", pre=True)
-    def field_as_obj(cls, v):
-        if isinstance(v, str):
-            return v
-
-        return str(v) if v else None
 
 
 class EventsResponseV1(BaseModel):
