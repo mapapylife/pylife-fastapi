@@ -5,6 +5,8 @@ var rc = null;
 
 var layers = {};
 var markers = {};
+var tilemaps = {};
+
 var last_update = null;
 
 
@@ -22,9 +24,41 @@ function setupLeaflet() {
     map.setView(rc.unproject([3000, 3000]), 4);
 
     // the tile layer containing the image generated with gdal2tiles.py
-    L.tileLayer('https://mapapylife.github.io/tilemap/{z}/{x}/{y}.png', {
-        attribution: 'Map data &copy; <a href="https://panel.pylife-rpg.pl/">Play Your Life</a>, Imagery &copy; <a href="https://github.com/Patrick2562/mtasa-map-images/">Patrick2562</a>',
-        noWrap: true
+    tilemaps = {
+        day: L.tileLayer('https://mapapylife.github.io/tilemap/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://panel.pylife-rpg.pl/">Play Your Life</a>, Imagery &copy; <a href="https://github.com/Patrick2562/mtasa-map-images/">Patrick2562</a>',
+            noWrap: true
+        }),
+        night: L.tileLayer('https://mapapylife.github.io/tilemap-night/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://panel.pylife-rpg.pl/">Play Your Life</a>, Imagery &copy; <a href="https://github.com/Patrick2562/mtasa-map-images/">Patrick2562</a>',
+            noWrap: true
+        })
+    };
+
+    // add day tilemap by default
+    tilemaps.day.addTo(map);
+
+    // create state changing button
+    L.easyButton({
+        states: [{
+            stateName: 'night',
+            icon: 'fa-moon-o',
+            title: 'Mapa nocna',
+            onClick: function(btn, map) {
+                map.removeLayer(tilemaps.day);
+                tilemaps.night.addTo(map);
+                btn.state('day');
+            }
+        }, {
+            stateName: 'day',
+            icon: 'fa-sun-o',
+            title: 'Mapa dzienna',
+            onClick: function(btn, map) {
+                map.removeLayer(tilemaps.night);
+                tilemaps.day.addTo(map);
+                btn.state('night');
+            }
+        }]
     }).addTo(map);
 
     // layer groups
@@ -438,6 +472,7 @@ $(document).ready(function() {
         $('#welcome').modal('show');
     }
 
+    // accept cookies
     $('#accept').click(function() {
         $('#welcome').modal('hide');
         setCookie('cookieconsent_status', 'dismiss', 365);
