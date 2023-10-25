@@ -39,7 +39,7 @@ function setupLeaflet() {
     var themeButton = L.easyButton({
         states: [{
             stateName: 'night',
-            icon: 'fa-solid fa-moon fa-fw fa-lg',
+            icon: 'fa-solid fa-moon fa-lg',
             title: 'Mapa nocna',
             onClick: function(btn, map) {
                 localStorage.setItem('theme', 'night');
@@ -51,7 +51,7 @@ function setupLeaflet() {
             }
         }, {
             stateName: 'day',
-            icon: 'fa-solid fa-sun fa-fw fa-lg',
+            icon: 'fa-solid fa-sun fa-lg',
             title: 'Mapa dzienna',
             onClick: function(btn, map) {
                 localStorage.setItem('theme', 'day');
@@ -175,6 +175,31 @@ function setupTypeahead() {
 }
 
 
+function getLocationName(location) {
+    const cityCodes = {
+        'San Fierro': 'SF',
+        'Las Venturas': 'LV',
+        'Bone County': 'BC',
+        'Flint County': 'FC',
+        'Los Santos': 'LS'
+    };
+
+    // add city zone to location name if root_name is not null
+    if (location.root_name) {
+        const abbreviation = cityCodes[location.root_name] || location.root_name;
+        return location.name + ', ' + abbreviation;
+    }
+
+    return location.name;
+}
+
+
+function getOwnerLink(owner) {
+    const premium = owner.premium && new Date(owner.premium) > new Date() ? ' premium' : '';
+    return '<a class="text-dark' + premium + '" href="//panel.pylife-rpg.pl/gracz/?id=' + owner.id + '" target="_blank">' + owner.name + '</a>';
+}
+
+
 function getHouseIcon(house) {
     if (house.owner) {
         return L.icon({iconUrl: '/static/icons/Icon_32.png', iconSize: [16, 16]});
@@ -216,10 +241,10 @@ function getZonePopupText(zone) {
 
 
 function getHousePopupText(house) {
-    var popupText = '<dl><dt>' + house.id  + '. ' + house.title + '</dt><dd>' + house.location + '</dd>';
+    var popupText = '<dl><dt>' + house.id  + '. ' + house.title + '</dt><dd>' + getLocationName(house.location) + '</dd>';
 
     if (house.owner) {
-        popupText += '<dt><i class="fa-solid fa-user fa-fw"></i> Właściciel:</dt><dd>' + house.owner + '</dd>';
+        popupText += '<dt><i class="fa-solid fa-user fa-fw"></i> Właściciel:</dt><dd>' + getOwnerLink(house.owner) + '</dd>';
         popupText += '<dt><i class="fa-regular fa-money-bill-1 fa-fw"></i> Cena:</dt><dd>' + formatPrice(house.price) + '€ za dobę</dd>';
         popupText += '<dt><i class="fa-solid fa-calendar-days fa-fw"></i> Wynajęty do:</dt><dd>' + formatDate(house.expires) + '</dd>';
     } else {
@@ -233,7 +258,7 @@ function getHousePopupText(house) {
 
 
 function getEventPopupText(event) {
-    var popupText = '<dl><dt>' + event.name + '</dt><dd>' + event.location + '</dd>' +
+    var popupText = '<dl><dt>' + event.name + '</dt><dd>' + getLocationName(event.location) + '</dd>' +
         '<dt><i class="fa-solid fa-info fa-fw"></i> Opis wydarzenia:</dt><dd>' + event.description + '</dd>';
 
     if (event.start_date) {
@@ -294,7 +319,7 @@ function createEventMarker(event) {
 
 function getHousesInZone(zone) {
     return Object.values(markers.houses).filter(function(house) {
-        return house.location === zone.name;
+        return house.location.name === zone.name || house.location.root_name === zone.name;
     });
 }
 
