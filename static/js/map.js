@@ -109,6 +109,7 @@ function setupLeaflet() {
 
 function setupTypeahead() {
     var inputSearch = document.getElementById('search');
+
     $(inputSearch).typeahead({
         items: 10,
         minLength: 2,
@@ -241,7 +242,14 @@ function getZonePopupText(zone) {
 
 
 function getHousePopupText(house) {
-    var popupText = '<dl><dt>' + house.id  + '. ' + house.title + '</dt><dd>' + getLocationName(house.location) + '</dd>';
+    var popupText = '<dl>';
+
+    if (house.organization) {
+        popupText += '<dd><a href="//panel.pylife-rpg.pl/organizacje/?id=' + house.organization.id + '" target="_blank">'
+        popupText += '<img height="64" width="64" onerror="this.onerror = null; this.src = \'//panel.pylife-rpg.pl/assets/blank.png\';" src="' + house.organization.logo_url + '" alt="' + house.organization.name + '"></a></dd>';
+    }
+
+    popupText += '<dt>' + house.id  + '. ' + house.title + '</dt><dd>' + getLocationName(house.location) + '</dd>';
 
     if (house.owner) {
         popupText += '<dt><i class="fa-solid fa-user fa-fw"></i> Właściciel:</dt><dd>' + getOwnerLink(house.owner) + '</dd>';
