@@ -197,7 +197,7 @@ function getLocationName(location) {
 
 function getOwnerLink(owner) {
     const premium = owner.premium && new Date(owner.premium) > new Date() ? ' premium' : '';
-    return '<a class="text-dark' + premium + '" href="//panel.pylife-rpg.pl/gracz/?id=' + owner.id + '" target="_blank">' + owner.name + '</a>';
+    return '<a class="link-dark' + premium + '" href="//panel.pylife-rpg.pl/gracz/?id=' + owner.id + '" target="_blank">' + owner.name + '</a>';
 }
 
 
