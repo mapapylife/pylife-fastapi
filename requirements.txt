@@ -2,6 +2,8 @@ aiohttp
 fastapi
 fastapi-limiter
 jinja2
+pydantic
+pydantic-settings
 pylife-api
 python-dotenv
 python-rapidjson

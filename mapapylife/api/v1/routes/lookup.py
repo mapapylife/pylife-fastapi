@@ -11,10 +11,10 @@ router = APIRouter(prefix="/lookup", tags=["lookup"])
 async def lookup(x: float, y: float, raw: bool = False) -> LookupResultV1:
     """Lookup a zone by coordinates"""
     zones = await Zone.all().order_by("root_id").prefetch_related("root")
-    point = Point(x, y) if raw else Point(x - 3000, y + 3000)
+    point = Point(x, y) if raw else Point(x - 3000, 3000 - y)
 
     for zone in zones:
         if point in zone:
-            return LookupResultV1.from_orm(zone)
+            return LookupResultV1.model_validate(zone, from_attributes=True)
 
     raise HTTPException(status_code=404, detail="Zone not found")

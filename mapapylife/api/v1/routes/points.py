@@ -36,7 +36,7 @@ async def get_houses(raw: bool = False, last_update: Optional[datetime] = None) 
             house.x = 3000 + house.x
             house.y = 3000 - house.y
 
-        data.append(HouseV1.from_orm(house))
+        data.append(HouseV1.model_validate(house, from_attributes=True))
 
     last_update = max(houses, key=lambda h: h.last_update).last_update if houses else None
     return HousesResponseV1(data=data, last_update=last_update)
@@ -53,7 +53,7 @@ async def get_blips(raw: bool = False) -> BlipsResponseV1:
             blip.x = 3000 + blip.x
             blip.y = 3000 - blip.y
 
-        data.append(BlipV1.from_orm(blip))
+        data.append(BlipV1.model_validate(blip, from_attributes=True))
 
     return BlipsResponseV1(data=data)
 
@@ -69,7 +69,7 @@ async def get_events(raw: bool = False) -> EventsResponseV1:
             event.x = 3000 + event.x
             event.y = 3000 - event.y
 
-        data.append(EventV1.from_orm(event))
+        data.append(EventV1.model_validate(event, from_attributes=True))
 
     return EventsResponseV1(data=data)
 
@@ -88,6 +88,6 @@ async def get_zones(raw: bool = False) -> ZonesResponseV1:
                 else:
                     zone.points[i] = [(3000 + point[0], 3000 - point[1]) for point in polygon]
 
-        data.append(ZoneV1.from_orm(zone))
+        data.append(ZoneV1.model_validate(zone, from_attributes=True))
 
     return ZonesResponseV1(data=data)
