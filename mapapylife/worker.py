@@ -4,6 +4,7 @@ import sys
 from datetime import datetime
 
 from pylife_api import PylifeAPIClient
+from shapely.speedups import available
 from tortoise import Tortoise, connections
 
 from mapapylife.config import get_settings
@@ -20,6 +21,9 @@ settings = get_settings()
 async def update_houses():
     # List containing houses to be updated
     updates = []
+
+    # List of available house ids
+    available_ids = set()
 
     # Load current houses from database
     houses = {house.id: house for house in await House.all()}
@@ -66,6 +70,9 @@ async def update_houses():
 
                 # Add organization ID to list
                 organizations.append(organization.id)
+
+            # Add house to available IDs
+            available_ids.add(house.id)
 
             # Get current house from database
             old_house = houses.get(house.id)
@@ -115,6 +122,14 @@ async def update_houses():
 
         # Update or create house in database
         await House.update_or_create(id=house.id, defaults=defaults)
+
+    # Delete houses that are no longer available
+    for house in houses.values():
+        if house.id not in available_ids:
+            logger.info(f'Deleting house "{house.title}" with ID {house.id}...')
+
+            # Delete house from database
+            await house.delete()
 
 
 async def update_players():
