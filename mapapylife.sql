@@ -25,7 +25,12 @@ DECLARE
 BEGIN
     -- Check if row has changed or is new
     IF (OLD IS NULL OR OLD.title <> NEW.title OR OLD.location_id <> NEW.location_id) THEN
-        SELECT name INTO location_name FROM map_zones WHERE id = NEW.location_id;
+        -- Check if location_id is null, and set location_name accordingly
+        IF NEW.location_id IS NOT NULL THEN
+            SELECT name INTO location_name FROM map_zones WHERE id = NEW.location_id;
+        ELSE
+            location_name := 'San Andreas';
+        END IF;
 
         -- Assign values from new row
         new_name := NEW.id || '. ' || NEW.title || ' (' || location_name || ')';

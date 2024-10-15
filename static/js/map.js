@@ -185,6 +185,11 @@ function getLocationName(location) {
         'Los Santos': 'LS'
     };
 
+    // no location name
+    if (!location) {
+        return 'San Andreas';
+    }
+
     // add city zone to location name if root_name is not null
     if (location.root_name) {
         const abbreviation = cityCodes[location.root_name] || location.root_name;
@@ -227,7 +232,7 @@ function getZonePopupText(zone) {
                 available++;
             }
 
-            total += house.price;
+            total += parseFloat(house.price);
         });
 
         var averagePrice = parseFloat(total / houses.length).toFixed(2);
@@ -327,7 +332,7 @@ function createEventMarker(event) {
 
 function getHousesInZone(zone) {
     return Object.values(markers.houses).filter(function(house) {
-        return house.location.name === zone.name || house.location.root_name === zone.name;
+        return house.location != null && (house.location.name === zone.name || house.location.root_name === zone.name);
     });
 }
 

@@ -33,7 +33,7 @@ class House(Model):
     x = fields.FloatField(null=False)
     y = fields.FloatField(null=False)
     title = fields.CharField(max_length=255, null=False)
-    location = fields.ForeignKeyField("models.Zone", null=False)
+    location = fields.ForeignKeyField("models.Zone", null=True)
     owner = fields.ForeignKeyField("models.Player", on_delete=fields.SET_NULL, null=True)
     organization = fields.ForeignKeyField("models.Organization", on_delete=fields.SET_NULL, null=True)
     price = fields.DecimalField(max_digits=10, decimal_places=2, null=False)
@@ -53,7 +53,7 @@ class House(Model):
         table = "map_houses"
 
     def __str__(self):
-        return f"{self.id}. {self.name}"
+        return f"{self.id}. {self.title}"
 
 
 class Blip(Model):
